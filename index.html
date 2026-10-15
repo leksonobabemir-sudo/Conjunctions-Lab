@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Conjunctions Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b1a;--bg2:#0e1530;--tx:#e8ecff;--mu:#8f9bc7;--ac:#00e5ff;--ac2:#8a5cff;--card:rgba(255,255,255,.06);--bd:rgba(255,255,255,.14);--ok:#2de6a0;--bad:#ff5c7a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme=light]{--bg:#eef2ff;--bg2:#fff;--tx:#14183a;--mu:#555d8a;--ac:#0069e0;--ac2:#7a3cff;--card:rgba(255,255,255,.85);--bd:rgba(20,24,58,.15);--ok:#0a9d66;--bad:#d9264a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input{-webkit-user-select:text;user-select:text}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--tx);background:radial-gradient(900px 500px at 85% -10%,rgba(138,92,255,.25),transparent),radial-gradient(800px 500px at -10% 110%,rgba(0,229,255,.18),transparent),var(--bg);min-height:100vh}
+.app{display:flex;min-height:100vh}
+aside{width:230px;padding:18px 12px;background:var(--bg2);border-right:1px solid var(--bd);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:6px}
+.logo{font-family:Orbitron,sans-serif;font-weight:800;font-size:17px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent;margin:4px 8px 14px}
+.nav{all:unset;box-sizing:border-box;cursor:pointer;padding:11px 12px;border-radius:12px;color:var(--mu);font-weight:600;border:1px solid transparent;display:block}
+.nav:hover{color:var(--tx)}.nav.on{color:var(--tx);background:var(--card);border-color:var(--ac);box-shadow:0 0 16px rgba(0,229,255,.25)}
+.by{margin-top:auto;font-size:12px;color:var(--mu);padding:8px}
+.by b{color:var(--tx)}
+.wrap{flex:1;min-width:0;padding:18px 22px 40px}
+.top{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between;margin-bottom:18px}
+.pill{background:var(--card);border:1px solid var(--bd);border-radius:999px;padding:8px 14px;font-size:13px;backdrop-filter:blur(8px)}
+.timer{font-family:Orbitron,sans-serif;font-weight:600;color:var(--ac)}.timer.low{color:var(--bad)}
+button.b{cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:999px;padding:8px 14px;font-weight:600;font-size:13px}
+button.p{cursor:pointer;border:0;background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;border-radius:12px;padding:12px 22px;font-weight:700;font-size:15px;box-shadow:0 6px 22px rgba(138,92,255,.35)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px;margin-bottom:14px;backdrop-filter:blur(10px)}
+h1{font-family:Orbitron,sans-serif;font-size:22px;margin:0 0 6px}h3{margin:0 0 8px}
+.mu{color:var(--mu);font-size:14px}
+label{display:block;font-size:13px;color:var(--mu);margin:10px 0 4px}
+input,select{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--bg2);color:var(--tx);font-size:15px;font-family:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.ex{border-left:3px solid var(--ac);padding:6px 12px;margin:6px 0;background:rgba(0,229,255,.06);border-radius:0 10px 10px 0}
+.k{color:var(--ac2);font-weight:700}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.o{cursor:pointer;padding:8px 14px;border-radius:10px;border:1px solid var(--bd);background:var(--bg2);color:var(--tx);font-size:14px}
+.o.sel{border-color:var(--ac);box-shadow:0 0 12px rgba(0,229,255,.4)}
+.o.ok{border-color:var(--ok);background:rgba(45,230,160,.18)}.o.no{border-color:var(--bad);background:rgba(255,92,122,.18)}
+.q{font-weight:600}
+.res{font-family:Orbitron,sans-serif;font-size:28px}
+.good{color:var(--ok)}.bad{color:var(--bad)}
+.log{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--ac);min-height:20px}
+canvas{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--bd);display:block;margin:10px 0}
+.lock{position:relative}
+.over{background:rgba(255,92,122,.15);border:1px solid var(--bad);padding:12px;border-radius:12px;margin-bottom:12px;font-weight:600}
+@media(max-width:760px){.app{flex-direction:column}aside{width:100%;height:auto;position:static;flex-direction:row;overflow-x:auto;padding:10px}.logo,.by{display:none}.nav{white-space:nowrap}.wrap{padding:14px}}
+@media print{body{display:none}}
+</style></head><body>
+<div class="app"><aside id="side"></aside>
+<div class="wrap"><div class="top"><div class="pill">🕒 <span id="clock"></span></div>
+<div class="pill timer" id="tm">40:00</div>
+<div style="display:flex;gap:8px"><button class="b" id="bl"></button><button class="b" id="bt"></button></div></div>
+<main id="main"></main></div></div>
+<script>
+const T={id:{app:"Conjunctions Lab",by:"Dibuat oleh",nav:["Identitas","Materi","Latihan 1","Latihan 2","Sertifikat"],idt:"Identitas Murid",nm:"Nama",cl:"Kelas",no:"Nomor Presensi",ma:"Asal Madrasah",start:"Simpan & Mulai",idm:"Isi semua data. Waktu pengerjaan 40 menit dimulai setelah data disimpan. Jika identitas berubah, soal diacak ulang otomatis (materi tetap sama) dan waktu diulang.",fill:"Lengkapi identitas dahulu.",mat:"Materi: Conjunctions",sum:["Conjunction adalah kata yang menghubungkan satu bagian kalimat atau informasi dengan yang lain.","Because, so, and, therefore menghubungkan alasan atau sebab-akibat.","So that menunjukkan maksud atau tujuan.","Although dan but menghubungkan hal yang berbeda dan biasanya tidak sejalan."],exh:"Contoh Kalimat",p1:"Latihan 1: Lengkapi kalimat dengan bagian yang tepat.",p2:"Latihan 2: Pilih jawaban yang benar.",pick:"-- pilih --",chk:"Periksa Jawaban",retry:"Ulangi (soal diacak)",score:"Skor",pass:"Selamat! Skor ≥ 80, sertifikat tersedia.",fail:"Skor belum mencapai 80. Coba lagi.",time:"Waktu habis! Aplikasi berhenti otomatis. Jawaban terkunci.",cert:"Sertifikat",ld:"Sertifikat terbuka jika skor ≥ 80. Skor saat ini:",dl:"Unduh Sertifikat",ana:["Menganalisis identitas…","Meriset ulang susunan soal…","Materi tetap, aktivitas diacak ✔"],extra:"Catatan: PDF hanya memiliki 9 pilihan untuk 10 kalimat, pilihan ke-10 ditambahkan untuk nomor 8.",ready:"Siap. Kode acak:"},
+en:{app:"Conjunctions Lab",by:"Created by",nav:["Identity","Material","Practice 1","Practice 2","Certificates"],idt:"Student Identity",nm:"Name",cl:"Class",no:"Attendance No.",ma:"Madrasah",start:"Save & Start",idm:"Fill in all fields. The 40-minute timer starts once saved. If the identity changes, activities are re-randomized automatically (same material) and the timer restarts.",fill:"Please complete your identity first.",mat:"Material: Conjunctions",sum:["Conjunctions link one part of a sentence or information with another.","Because, so, and, therefore link reasoning or cause and effect.","So that shows intention or purpose.","Although and but link different ideas that do not normally go together."],exh:"Example Sentences",p1:"Practice 1: Complete each sentence with the right part.",p2:"Practice 2: Choose the correct answer.",pick:"-- choose --",chk:"Check Answers",retry:"Retry (reshuffled)",score:"Score",pass:"Congratulations! Score ≥ 80, certificate unlocked.",fail:"Score is below 80. Try again.",time:"Time is up! The app stopped automatically. Answers are locked.",cert:"Certificate",ld:"Certificate unlocks at score ≥ 80. Current score:",dl:"Download Certificate",ana:["Analyzing identity…","Re-researching question arrangement…","Material unchanged, activities shuffled ✔"],extra:"Note: the PDF gives 9 options for 10 sentences; a 10th option was added for number 8.",ready:"Ready. Shuffle code:"}};
+const EX=["I'm happy because today is my birthday.","It's cloudy, therefore I bring an umbrella with me.","I woke up late so I arrived at school late too.","Although I have told him the truth, he still doesn't believe it.","Alinda is a famous star, but she is very modest.","We left early so that we wouldn't be late.","I'm so sad because I got a bad mark on my science project.","Dina and Dini are twin sisters, but their faces do not look similar.","I like cakes and cupcakes, but I do not like potato chips.","Although Andy is so rich, he is not arrogant."];
+const KW=/\b(because|therefore|so that|so|although|but|and)\b/i;
+const P1=[["The children are playing in the garden","although it is drizzling"],["He took his new toy to school","so he could show it to his friends"],["The children are wearing their aprons","because they are going to start to paint"],["You can watch a video","because you've done homework"],["Go to bed early","so you're not tired in the morning"],["The children went inside","because it had started to rain"],["John took a map","so that he wouldn't get lost"],["I haven't finished my breakfast,","but I have to leave for school now"],["Social science subjects need a lot of reading,","therefore I make myself read the books every day"],["Let's write down the address","so we don't forget it"]];
+const Q=[["I'm so sleepy, … I haven't finished my homework yet. What should I do?","but|and|because|although",0],["The teachers like Salma very much … she likes to help her friend","because|and|but|so",0],["We sang … danced during the party last night","although|therefore|but|and",3],["The garden is shady, … it is very dirty","because|and|but|so",2],["The room was dark, … Michelle turned on the lamp","because|and|but|so",3],["The students want to visit the museum … they can learn about their ancestor","but|so that|because|although",1],["I will tell him the reason for my coming late … he will let me join his class","so|but|so that|because",2],["Suwarno can speak English well, … he can't speak Spanish at all","so|but|and|because",1],["… the room looks spacious, it can't accommodate many people","So|But|Because|Although",3],["The weather was very sunny … rather cold","but|and|because|although",0],["I want to stay awake to study tonight … I need to have a nap now","but|and|because|therefore",0],["You will enjoy snorkeling very much in Karimun Jawa … it has some awesome reef","but|and|because|although",2],["All the news on TV is about crime, … I rarely watch it. I hate watching criminal news","so|and|because|although",0],["Consuming only good food … doing exercises are the key to be healthy","but|and|because|although",1],["Mrs. Diana is forty years old, … she looks as if she is in her thirties","but|and|because|although",0],["We enjoyed the beverages very much, … we didn't like the food. They're too spicy.","but|because|although|therefore",0],["The cat was wet and wounded, … I took it to the veterinarian.","so|but|because|although",0],["It rained heavily last night, … the road is flooded now.","but|because|although|therefore",3],["… it is cold outside, the children are playing in the snow cheerfully.","but|why|because|although",3],["I can't understand the lesson … I didn't pay attention to Mr Budi's explanation.","so|because|although|therefore",1]];
+const S={lang:"id",theme:matchMedia("(prefers-color-scheme: light)").matches?"light":"dark",view:0,id:null,end:0,done:false,q1:[],pool:[],q2:[],a1:[],a2:[],ch1:false,ch2:false,sc:[null,null],code:""};
+const $=s=>document.querySelector(s),t=k=>T[S.lang][k];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function hash(s){let h=1779033703;for(const c of s)h=Math.imul(h^c.charCodeAt(0),3432918353),h=h<<13|h>>>19;return h>>>0}
+function rng(a){return()=>{a|=0;a=a+1831565813|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuf(a,r){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){const h=hash(Object.values(S.id).join("|").toLowerCase()),r=rng(h);S.code=h.toString(36).toUpperCase();
+S.q1=shuf(P1,r);S.pool=shuf(P1.map(x=>x[1]),r);
+S.q2=shuf(Q,r).map(q=>{const o=q[1].split("|");return{s:q[0].replace("…","_____"),o:shuf(o,r),a:o[q[2]]}});
+S.a1=[];S.a2=[];S.ch1=S.ch2=false;S.sc=[null,null]}
+function render(){
+$("#bl").textContent=S.lang==="id"?"🌐 English":"🌐 Indonesia";$("#bt").textContent=S.theme==="dark"?"☀️ Light":"🌙 Dark";
+document.documentElement.dataset.theme=S.theme;document.documentElement.lang=S.lang;
+$("#side").innerHTML=`<div class="logo">${t("app")}</div>`+t("nav").map((n,i)=>`<button class="nav ${S.view===i?"on":""}" data-v="${i}">${["🪪","📘","🧩","🎯","🏅"][i]} ${n}</button>`).join("")+`<div class="by">${t("by")}<br><b>Ahmad Budi Leksono</b></div>`;
+const m=$("#main");
+if(S.view>0&&!S.id){m.innerHTML=`<div class="card"><h1>${t("nav")[S.view]}</h1><p class="mu">${t("fill")}</p></div>`;return}
+if(S.view===0)m.innerHTML=`<div class="card"><h1>${t("idt")}</h1><p class="mu">${t("idm")}</p><div class="grid"><div><label>${t("nm")}</label><input id="f0" autocomplete="off" value="${esc(S.id?.n||"")}"></div><div><label>${t("cl")}</label><input id="f1" autocomplete="off" value="${esc(S.id?.c||"")}"></div><div><label>${t("no")}</label><input id="f2" inputmode="numeric" autocomplete="off" value="${esc(S.id?.p||"")}"></div><div><label>${t("ma")}</label><input id="f3" autocomplete="off" value="${esc(S.id?.m||"")}"></div></div><br><button class="p" id="go">${t("start")}</button><p class="log" id="lg">${S.id?t("ready")+" "+S.code:""}</p></div>`;
+if(S.view===1)m.innerHTML=`<div class="card"><h1>${t("mat")}</h1>${t("sum").map((x,i)=>`<p>${i+1}. ${x}</p>`).join("")}</div><div class="card"><h3>${t("exh")}</h3>${EX.map(e=>`<div class="ex">${e.replace(KW,'<span class="k">$1</span>')}</div>`).join("")}</div>`;
+if(S.view===2){const dis=S.done||S.ch1?"disabled":"";m.innerHTML=`<div class="card"><h1>${t("p1")}</h1>${S.done?`<div class="over">${t("time")}</div>`:""}<p class="mu">${t("extra")}</p>${S.q1.map((q,i)=>`<p class="q">${i+1}. ${q[0]}</p><select data-i="${i}" ${dis}><option value="">${t("pick")}</option>${S.pool.map(o=>`<option ${S.a1[i]===o?"selected":""}>${esc(o)}</option>`).join("")}</select>${S.ch1?`<div class="${S.a1[i]===q[1]?"good":"bad"}">${S.a1[i]===q[1]?"✔":"✘ → "+esc(q[1])}</div>`:""}`).join("")}<br>${S.ch1?"":`<button class="p" id="c1" ${S.done?"disabled":""}>${t("chk")}</button>`}${resBox(0)}</div>`}
+if(S.view===3){m.innerHTML=`<div class="card"><h1>${t("p2")}</h1>${S.done?`<div class="over">${t("time")}</div>`:""}${S.q2.map((q,i)=>`<div class="q" style="margin-top:14px">${i+1}. ${esc(q.s)}</div><div class="opts">${q.o.map(o=>{let c="o";if(S.ch2){if(o===q.a)c+=" ok";else if(S.a2[i]===o)c+=" no"}else if(S.a2[i]===o)c+=" sel";return`<button class="${c}" data-q="${i}" data-o="${esc(o)}" ${S.done||S.ch2?"disabled":""}>${esc(o)}</button>`}).join("")}</div>`).join("")}<br>${S.ch2?"":`<button class="p" id="c2" ${S.done?"disabled":""}>${t("chk")}</button>`}${resBox(1)}</div>`}
+if(S.view===4){m.innerHTML=[0,1].map(i=>`<div class="card"><h3>${t("cert")} — ${t("nav")[i+2]}</h3>${S.sc[i]!==null&&S.sc[i]>=80?`<canvas id="cv${i}"></canvas><button class="p" data-d="${i}">${t("dl")}</button>`:`<p class="mu">${t("ld")} <b>${S.sc[i]===null?"–":S.sc[i]}</b></p>`}</div>`).join("");[0,1].forEach(i=>{if(S.sc[i]>=80)draw($("#cv"+i),i)})}
+}
+function resBox(i){if(S.sc[i]===null)return"";const ok=S.sc[i]>=80;return`<div class="card" style="margin-top:14px"><div class="res ${ok?"good":"bad"}">${t("score")}: ${S.sc[i]}</div><p>${ok?t("pass"):t("fail")}</p><button class="b" data-r="${i}">${t("retry")}</button></div>`}
+function draw(c,i){const W=1200,H=850,x=c.getContext("2d");c.width=W;c.height=H;
+let g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,"#0b1230");g.addColorStop(1,"#2a1670");x.fillStyle=g;x.fillRect(0,0,W,H);
+x.strokeStyle="#00e5ff";x.lineWidth=6;x.strokeRect(30,30,W-60,H-60);x.strokeStyle="#8a5cff";x.lineWidth=2;x.strokeRect(48,48,W-96,H-96);
+x.textAlign="center";x.fillStyle="#fff";
+x.font="700 60px Georgia,serif";x.fillText("CERTIFICATE OF ACHIEVEMENT",W/2,170);
+x.font="26px sans-serif";x.fillStyle="#9fb0ff";x.fillText("Conjunctions Lab",W/2,220);
+x.fillStyle="#fff";x.font="24px sans-serif";x.fillText("This certificate is proudly presented to",W/2,300);
+x.font="italic 700 62px Georgia,serif";x.fillStyle="#00e5ff";x.fillText(S.id.n,W/2,385,1000);
+x.fillStyle="#fff";x.font="26px sans-serif";x.fillText(`Class ${S.id.c}  •  No. ${S.id.p}  •  ${S.id.m}`,W/2,445,1000);
+x.fillText("for successfully completing",W/2,520);
+x.font="700 38px sans-serif";x.fillText(["Practice 1 — Completing Sentences","Practice 2 — Multiple Choice"][i],W/2,575);
+x.font="700 70px Georgia,serif";x.fillStyle="#2de6a0";x.fillText("Score: "+S.sc[i],W/2,670);
+x.fillStyle="#9fb0ff";x.font="22px sans-serif";x.fillText(new Date().toLocaleDateString(S.lang==="id"?"id-ID":"en-GB",{day:"numeric",month:"long",year:"numeric"}),W/2,740);
+x.fillStyle="#fff";x.font="italic 24px Georgia,serif";x.fillText("Created by Ahmad Budi Leksono",W/2,785)}
+function score(i){S.sc[i]=Math.round((i?S.q2.filter((q,k)=>S.a2[k]===q.a).length/20:S.q1.filter((q,k)=>S.a1[k]===q[1]).length/10)*100)}
+function pad(n){return String(n).padStart(2,"0")}
+function tick(){$("#clock").textContent=new Date().toLocaleTimeString(S.lang==="id"?"id-ID":"en-GB");
+if(!S.id){return}if(S.done)return;const l=Math.max(0,Math.ceil((S.end-Date.now())/1000));
+$("#tm").textContent=pad(Math.floor(l/60))+":"+pad(l%60);$("#tm").classList.toggle("low",l<300);
+if(l<=0){S.done=true;if(S.sc[0]===null&&S.view===2&&S.q1.length){}[0,1].forEach(i=>{if(S.sc[i]===null){if(i===0)S.ch1=true;else S.ch2=true;score(i)}});render()}}
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+if(b.dataset.v!==undefined){S.view=+b.dataset.v;render()}
+else if(b.id==="bl"){S.lang=S.lang==="id"?"en":"id";render()}
+else if(b.id==="bt"){S.theme=S.theme==="dark"?"light":"dark";render()}
+else if(b.id==="go"){const v=[0,1,2,3].map(i=>$("#f"+i).value.trim());if(v.some(x=>!x)){alert(t("fill"));return}
+const nid={n:v[0],c:v[1],p:v[2],m:v[3]};if(S.id&&JSON.stringify(nid)===JSON.stringify(S.id)&&!S.done){S.view=1;render();return}
+S.id=nid;S.done=false;build();S.end=Date.now()+2400000;const lg=$("#lg");let k=0;b.disabled=true;
+const iv=setInterval(()=>{if(k<3){lg.textContent="⟳ "+t("ana")[k++]}else{clearInterval(iv);S.view=1;render()}},650);tick()}
+else if(b.id==="c1"){score(0);S.ch1=true;render()}
+else if(b.id==="c2"){score(1);S.ch2=true;render()}
+else if(b.dataset.r!==undefined){const i=+b.dataset.r;const h=hash(Object.values(S.id).join("|").toLowerCase()+Date.now()),r=rng(h);
+if(i===0){S.q1=shuf(P1,r);S.pool=shuf(P1.map(x=>x[1]),r);S.a1=[];S.ch1=false}else{S.q2=shuf(Q,r).map(q=>{const o=q[1].split("|");return{s:q[0].replace("…","_____"),o:shuf(o,r),a:o[q[2]]}});S.a2=[];S.ch2=false}S.sc[i]=null;render()}
+else if(b.dataset.q!==undefined){S.a2[+b.dataset.q]=b.dataset.o;render()}
+else if(b.dataset.d!==undefined){const a=document.createElement("a");a.href=$("#cv"+b.dataset.d).toDataURL("image/png");a.download=`Certificate-${S.id.n.replace(/\W+/g,"_")}-${+b.dataset.d+1}.png`;a.click()}});
+document.addEventListener("change",e=>{if(e.target.dataset.i!==undefined)S.a1[+e.target.dataset.i]=e.target.value});
+["copy","cut","paste","contextmenu","selectstart","dragstart","drop"].forEach(n=>document.addEventListener(n,e=>{if(n==="selectstart"&&e.target.closest&&e.target.closest("input"))return;e.preventDefault()}));
+document.addEventListener("keydown",e=>{const k=e.key.toLowerCase();
+if((e.ctrlKey||e.metaKey)&&["c","v","x","a","u","s","p","i","j"].includes(k)||e.key==="F12"||e.key==="PrintScreen"||(e.shiftKey&&e.key==="Insert")){e.preventDefault();if(e.key==="PrintScreen")try{navigator.clipboard.writeText("")}catch(_){}}});
+setInterval(tick,1000);tick();render();
+</script></body></html>
